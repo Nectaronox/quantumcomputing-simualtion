@@ -58,9 +58,9 @@ npm install
 npm run dev
 ```
 
-### 백엔드
+### 백엔드 (별도 서버 필요)
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-backend.txt
 python backend.py
 ```
 

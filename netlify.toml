@@ -1,6 +1,7 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  ignore = "requirements.txt"
 
 # SPA 라우팅을 위한 리다이렉트 설정
 [[redirects]]
@@ -8,6 +9,8 @@
   to = "/index.html"
   status = 200
 
-# Python 백엔드 함수 설정 (선택사항)
+# Node.js 환경 설정
 [build.environment]
-  NODE_VERSION = "18" 
+  NODE_VERSION = "18"
+  # Python 종속성 무시
+  SKIP_PYTHON_INSTALL = "true" 
