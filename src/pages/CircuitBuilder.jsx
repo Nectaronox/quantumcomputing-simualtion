@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import config from '../config';
 
 const CircuitBuilder = () => {
   const [searchParams] = useSearchParams();
@@ -324,7 +325,7 @@ console.log("JavaScript 시뮬레이션 결과");`;
     setExecutionResult(null);
     
     try {
-      const response = await fetch('http://localhost:5000/execute-quantum-code', {
+      const response = await fetch(`${config.API_BASE_URL}${config.endpoints.executeCode}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
