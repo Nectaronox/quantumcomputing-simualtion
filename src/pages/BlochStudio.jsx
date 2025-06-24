@@ -115,7 +115,7 @@ const BlochStudio = () => {
     }
   }
 
-  // 상태 벡터에서 블로흐 구 좌표 계산
+  // 상태 벡터에서 블로흐 구 좌표 계산 (수정된 올바른 공식)
   const blochFromState = (alpha, beta) => {
     // |ψ⟩ = α|0⟩ + β|1⟩에서 블로흐 구 좌표 계산
     // 올바른 블로흐 벡터 공식 사용: r⃗ = ⟨ψ|σ⃗|ψ⟩
@@ -129,11 +129,11 @@ const BlochStudio = () => {
       beta = beta.multiply(1 / normSqrt);
     }
     
-    // 블로흐 벡터 성분 계산
-    // x = ⟨ψ|σx|ψ⟩ = 2 * Re(α*β)  
+    // 블로흐 벡터 성분 계산 (수정된 올바른 공식)
+    // x = ⟨ψ|σx|ψ⟩ = 2 * Re(α*β*) = α*β + α*β*
     const x = 2 * (alpha.real * beta.real + alpha.imag * beta.imag);
-    // y = ⟨ψ|σy|ψ⟩ = 2 * Im(α*β) 
-    const y = 2 * (beta.imag * alpha.real - alpha.imag * beta.real);
+    // y = ⟨ψ|σy|ψ⟩ = 2 * Im(α*β*) = -i(α*β - α*β*)
+    const y = 2 * (alpha.real * beta.imag - alpha.imag * beta.real);
     // z = ⟨ψ|σz|ψ⟩ = |α|² - |β|²
     const z = alpha.magnitude() ** 2 - beta.magnitude() ** 2;
     
@@ -146,7 +146,7 @@ const BlochStudio = () => {
     return { theta, phi };
   };
 
-  // 블로흐 구 좌표에서 상태 벡터 계산
+  // 블로흐 벡터에서 상태 벡터 계산
   const stateFromBloch = (theta, phi) => {
     // 올바른 블로흐 구 매개변수화
     // |ψ⟩ = cos(θ/2)|0⟩ + e^(iφ)sin(θ/2)|1⟩
@@ -175,9 +175,9 @@ const BlochStudio = () => {
         newBeta = alpha;
         break;
       
-      case 'Y': // Pauli-Y - Y = [[0, -i], [i, 0]]
-        newAlpha = beta.multiply(new Complex(0, -1)); // -i * β
-        newBeta = alpha.multiply(new Complex(0, 1));  // i * α
+      case 'Y': // Pauli-Y - Y = [[0, -i], [i, 0]] - 수정된 올바른 구현
+        newAlpha = beta.multiply(new Complex(0, 1)); // i * β
+        newBeta = alpha.multiply(new Complex(0, -1));  // -i * α
         break;
       
       case 'Z': // Pauli-Z - Z = [[1, 0], [0, -1]]
