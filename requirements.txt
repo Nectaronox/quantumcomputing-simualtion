@@ -1,9 +1,0 @@
-Flask==3.0.0
-Flask-CORS==4.0.0
-numpy==1.26.2
-matplotlib==3.8.2
-requests==2.31.0
-scipy==1.11.4
-# 성능 최적화를 위한 추가 패키지
-numba>=0.58.0  # JIT 컴파일로 numpy 연산 가속화
-# qiskit 의존성 제거 완료 - 순수 파이썬 양자 시뮬레이터 사용 
